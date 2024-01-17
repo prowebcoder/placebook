@@ -9,7 +9,9 @@ function UserItem(props) {
         </div>
         <div className="user-item__info">
           <div className="user-item-name">Name: {props.name}</div>
-          <div className="user-item-placecount">Place: {props.placecount}</div>
+          <div className="user-item-placecount">
+            {props.placecount === "1" ? "Place" : "Places"}: {props.placecount}
+          </div>
         </div>
       </div>
     </li>
