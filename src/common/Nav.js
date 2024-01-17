@@ -4,8 +4,9 @@ import "./nav.css";
 function Nav() {
   return (
     <div className="navbar">
-      <Link to="/user">User</Link>
-      <Link to="/place">Place</Link>
+      <Link to="/users">All Users</Link>
+      <Link to="/places">Places</Link>
+      <Link to="/:user/places">User Places</Link>
     </div>
   );
 }
