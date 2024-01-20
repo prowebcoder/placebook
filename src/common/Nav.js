@@ -1,22 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
 import Avatar from "./Avatar";
 import MainHeader from "./MainHeader";
 import NavLinks from "./NavLinks";
 import SideDrawer from "./SideDrawer";
+import Backdrop from "./Backdrop";
 function Nav() {
+  const [sideDrawer, setsideDrawer] = useState(false);
+
+  function showSideDrawer() {
+    setsideDrawer(true);
+  }
+  function hideSideDrawer() {
+    setsideDrawer(false);
+  }
+
   const image =
     "https://prowebcoder.com/cdn/shop/files/logo.png?v=1619583060&width=500";
   return (
-    <>
-      <SideDrawer>
-        <nav className="main-navigation__drawer-nav">
-          <NavLinks></NavLinks>
-        </nav>
-      </SideDrawer>
+    <React.Fragment>
+      {sideDrawer && (
+        <>
+          <Backdrop onClick={hideSideDrawer}></Backdrop>
+          <SideDrawer>
+            <nav className="main-navigation__drawer-nav">
+              <NavLinks></NavLinks>
+            </nav>
+          </SideDrawer>
+        </>
+      )}
       <MainHeader>
-        <button className="main-navigation__menu-btn">
+        <button className="main-navigation__menu-btn" onClick={showSideDrawer}>
           <span></span>
           <span></span>
           <span></span>
@@ -30,7 +45,7 @@ function Nav() {
           <NavLinks></NavLinks>
         </nav>
       </MainHeader>
-    </>
+    </React.Fragment>
   );
 }
 

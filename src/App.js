@@ -1,13 +1,13 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { Fragment } from "react";
 import Nav from "./common/Nav";
 import Users from "./user/component/Users";
 import Places from "./places/component/Places";
 import PageNotFound from "./PageNotFound";
 const App = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <Nav />
       <main>
         <Routes>
@@ -18,7 +18,7 @@ const App = () => {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
