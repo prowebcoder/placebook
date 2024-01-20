@@ -2,9 +2,14 @@ import React from "react";
 // import Users from "./Users";
 import UserItem from "./UserItem";
 import "./UserList.css";
+import Card from "./Card";
 function UserList(props) {
   if (props.items.length === 0) {
-    return <div>No Users Were Found</div>;
+    return (
+      <Card className="nouser">
+        <div>No Users Were Found</div>
+      </Card>
+    );
   }
   return (
     <ul className="list-users">

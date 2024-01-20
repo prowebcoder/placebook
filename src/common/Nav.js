@@ -2,20 +2,35 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
 import Avatar from "./Avatar";
+import MainHeader from "./MainHeader";
+import NavLinks from "./NavLinks";
+import SideDrawer from "./SideDrawer";
 function Nav() {
   const image =
     "https://prowebcoder.com/cdn/shop/files/logo.png?v=1619583060&width=500";
   return (
-    <header className="header">
-      <div className="logo">
-        <Avatar image={image} className="logo"></Avatar>
-      </div>
-      <div className="navbar">
-        <Link to="/users">All Users</Link>
-        <Link to="/places">Places</Link>
-        <Link to="/:user/places">User Places</Link>
-      </div>
-    </header>
+    <>
+      <SideDrawer>
+        <nav className="main-navigation__drawer-nav">
+          <NavLinks></NavLinks>
+        </nav>
+      </SideDrawer>
+      <MainHeader>
+        <button className="main-navigation__menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <h1 className="logo main-navigation__title">
+          <Link to="/">
+            <Avatar image={image} className="logo"></Avatar>
+          </Link>
+        </h1>
+        <nav className="main-navigation__header-nav">
+          <NavLinks></NavLinks>
+        </nav>
+      </MainHeader>
+    </>
   );
 }
 
