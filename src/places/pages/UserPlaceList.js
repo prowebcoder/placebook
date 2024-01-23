@@ -1,8 +1,16 @@
 import React from "react";
 import PlaceItem from "./PlaceItem";
 import Card from "../../user/component/Card";
+import { useParams } from "react-router-dom";
 import "./PlaceList.css";
-function PlaceList(props) {
+function UserPlaceList(props) {
+  const { userID, name } = useParams();
+  // console.log(props.items);
+  // console.log("userId:", userID);
+  console.log("name:", name);
+  // Filter places based on the dynamic userId parameter
+  const filteredPlaces = props.items.filter((item) => item.creator === userID);
+  console.log(filteredPlaces);
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
@@ -16,7 +24,7 @@ function PlaceList(props) {
 
   return (
     <ul className="place-list">
-      {props.items.map((place) => (
+      {filteredPlaces.map((place) => (
         <PlaceItem
           key={place.id}
           id={place.id}
@@ -32,4 +40,4 @@ function PlaceList(props) {
   );
 }
 
-export default PlaceList;
+export default UserPlaceList;

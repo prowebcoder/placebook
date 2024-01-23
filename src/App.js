@@ -5,6 +5,7 @@ import Nav from "./common/Nav";
 import Users from "./user/component/Users";
 import Places from "./places/component/Places";
 import PageNotFound from "./PageNotFound";
+import UserPlaces from "./places/component/UserPlaces";
 const App = () => {
   return (
     <Fragment>
@@ -14,7 +15,8 @@ const App = () => {
           <Route path="/" exact element={<Users />} />
           <Route path="/users" element={<Users />} />
           <Route path="/places" element={<Places />} />
-          <Route path="/:userID/places" element={<Places />} />
+          <Route path="/:userID/:name/places" exact element={<UserPlaces />} />
+
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>

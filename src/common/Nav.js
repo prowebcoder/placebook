@@ -4,8 +4,8 @@ import "./nav.css";
 import Avatar from "./Avatar";
 import MainHeader from "./MainHeader";
 import NavLinks from "./NavLinks";
-import SideDrawer from "./SideDrawer";
-import Backdrop from "./Backdrop";
+import SideDrawer from "./UIComponents/SideDrawer";
+import Backdrop from "./UIComponents/Backdrop";
 function Nav() {
   const [sideDrawer, setsideDrawer] = useState(false);
 
