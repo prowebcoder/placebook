@@ -12,6 +12,13 @@ function NavLinks() {
       <li>
         <NavLink to="/:user/places">User Places</NavLink>
       </li>
+      <li>
+        <NavLink to="places/add-place">Add Place</NavLink>
+      </li>
+
+      <li>
+        <NavLink to="/auth">Authenticate</NavLink>
+      </li>
     </ul>
   );
 }

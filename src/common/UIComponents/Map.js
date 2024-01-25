@@ -5,7 +5,7 @@ function Map(props) {
   const mapRef = useRef();
   const { center, zoom } = props;
   useEffect(() => {
-    console.log(mapRef.current);
+    // console.log(mapRef.current);
     const map = new window.google.maps.Map(mapRef.current, {
       zoom: zoom,
       center: center,
