@@ -10,10 +10,12 @@
 }
 
 .modal__header {
-  width: 100%;
+  /* width: 100%; */
   padding: 1rem 0.5rem;
   background: #2a006e;
   color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 .modal__header h2 {
@@ -25,7 +27,7 @@
 }
 
 .modal__footer {
-  padding: 1rem 0.5rem;
+  /* padding: 1rem 0.5rem; */
 }
 
 @media (min-width: 768px) {

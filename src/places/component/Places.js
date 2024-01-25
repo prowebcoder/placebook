@@ -10,8 +10,8 @@ export const DUMMY_PLACES = [
     description:
       "Dharamshala is a city in the Indian state of Himachal Pradesh. Surrounded by cedar forests on the edge of the Himalayas, this hillside city is home to the Dalai Lama and the Tibetan government-in-exile.",
     location: {
-      lat: "32.216778",
-      long: "76.3191652",
+      lat: 32.216778,
+      lng: 76.3191652,
     },
     creator: "1",
   },
@@ -24,8 +24,8 @@ export const DUMMY_PLACES = [
     description:
       "Dharamshala is a city in the Indian state of Himachal Pradesh. Surrounded by cedar forests on the edge of the Himalayas, this hillside city is home to the Dalai Lama and the Tibetan government-in-exile.",
     location: {
-      lat: "32.216778",
-      long: "76.3191652",
+      lat: 32.216778,
+      lng: 76.3191652,
     },
     creator: "2",
   },
@@ -38,8 +38,8 @@ export const DUMMY_PLACES = [
     description:
       "Dharamshala is a city in the Indian state of Himachal Pradesh. Surrounded by cedar forests on the edge of the Himalayas, this hillside city is home to the Dalai Lama and the Tibetan government-in-exile.",
     location: {
-      lat: "32.216778",
-      long: "76.3191652",
+      lat: 28.679079,
+      lng: 77.06971,
     },
     creator: "3",
   },
@@ -52,8 +52,8 @@ export const DUMMY_PLACES = [
     description:
       "Dharamshala is a city in the Indian state of Himachal Pradesh. Surrounded by cedar forests on the edge of the Himalayas, this hillside city is home to the Dalai Lama and the Tibetan government-in-exile.",
     location: {
-      lat: "32.216778",
-      long: "76.3191652",
+      lat: 28.679079,
+      lng: 77.06971,
     },
     creator: "1",
   },
@@ -66,8 +66,8 @@ export const DUMMY_PLACES = [
     description:
       "Dharamshala is a city in the Indian state of Himachal Pradesh. Surrounded by cedar forests on the edge of the Himalayas, this hillside city is home to the Dalai Lama and the Tibetan government-in-exile.",
     location: {
-      lat: "32.216778",
-      long: "76.3191652",
+      lat: 32.216778,
+      lng: 76.3191652,
     },
     creator: "4",
   },
