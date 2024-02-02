@@ -38,11 +38,17 @@
 .place-item__modal-content {
   padding: 0;
 }
-
+p.space_items_buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 3rem 0;
+}
 .place-item__modal-actions {
   text-align: right;
+  display: flex;
+  gap: 10px;
 }
-
 .place-item__actions button,
 .place-item__actions a {
   margin: 0.5rem;
@@ -51,5 +57,5 @@
 @media (min-width: 768px) {
   .place-item__image {
     height: 20rem;
-  } 
+  }
 }

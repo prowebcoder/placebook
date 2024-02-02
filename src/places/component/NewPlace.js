@@ -40,6 +40,7 @@ function NewPlace() {
         type="text"
         label="title"
         placeholder="title"
+        initialValue={formState.inputs.title.value}
         errorText="Please enter a valid title"
       />
 
@@ -49,6 +50,7 @@ function NewPlace() {
         element="input"
         label="Address"
         validators={[VALIDATOR_REQUIRE()]}
+        initialValue={formState.inputs.address.value}
         placeholder="address"
         errorText="Please enter a valid address."
         onInput={inputHandler}
@@ -59,6 +61,7 @@ function NewPlace() {
         id="description"
         validators={[VALIDATOR_REQUIRE()]}
         onInput={inputHandler}
+        initialValue={formState.inputs.description.value}
         placeholder="Description"
         errorText="Please enter a valid description (at least 5 characters)."
       />
