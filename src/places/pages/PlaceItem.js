@@ -10,7 +10,7 @@ const PlaceItem = (props) => {
   const openMapHandler = () => setShowMap(true);
 
   const closeMapHandler = () => setShowMap(false);
-  console.log(props.id);
+
   return (
     <>
       <Modal

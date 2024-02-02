@@ -15,6 +15,9 @@ function NavLinks() {
       <li>
         <NavLink to="places/add-place">Add Place</NavLink>
       </li>
+      <li>
+        <NavLink to="places/check">Check</NavLink>
+      </li>
 
       <li>
         <NavLink to="/auth">Authenticate</NavLink>
