@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Input from "../../common/UIComponents/Input";
 import Button from "../../common/UIComponents/Button";
 import { useFormHook } from "../../common/form-hook";
+
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -9,7 +10,11 @@ import {
 } from "../../common/UIComponents/Validator";
 import Card from "../component/Card";
 import "./Auth.css";
+import { AuthContext } from "../../context/log-context";
+import { useNavigate } from "react-router-dom";
 function Auth() {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formState, inputHandler, setFormData] = useFormHook(
     {
@@ -27,8 +32,10 @@ function Auth() {
 
   const authSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(formState.isValid);
+
+    auth.login();
     console.log(formState.inputs);
+    navigate("/");
   };
   function signUpHandler() {
     if (!isLoginMode) {
