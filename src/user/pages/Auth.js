@@ -30,9 +30,17 @@ function Auth() {
     false
   );
 
-  const authSubmitHandler = (event) => {
+  const authSubmitHandler = async (event) => {
     event.preventDefault();
-
+    await fetch("http://localhost:4000/api/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formState.inputs.name.value,
+        email: formState.inputs.email.value,
+        password: formState.inputs.password.value,
+      }),
+    });
     auth.login();
     console.log(formState.inputs);
     navigate("/");
