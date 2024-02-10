@@ -47,28 +47,42 @@ function Auth() {
             password: formState.inputs.password.value,
           }),
         });
+
         const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(responseData.message || responseData);
+        }
+        setIsLoading(false);
+        auth.login();
         console.log(responseData);
       } catch (err) {
         setIsLoading(false);
         setError(err.message || "something went wrong please try again");
       }
     } else {
-      const response = await fetch("http://localhost:4000/api/users/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formState.inputs.email.value,
-          name: formState.inputs.name.value,
-          password: formState.inputs.password.value,
-        }),
-      });
-      const responseData = await response.json();
-      console.log(responseData);
-      setIsLoading(false);
+      try {
+        const response = await fetch("http://localhost:4000/api/users/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: formState.inputs.email.value,
+            name: formState.inputs.name.value,
+            password: formState.inputs.password.value,
+          }),
+        });
+        const responseData = await response.json();
+        console.log(responseData);
+        if (!response.ok) {
+          throw new Error(responseData.message || responseData);
+        }
+        setIsLoading(false);
+        auth.login();
+      } catch (err) {
+        setIsLoading(false);
+        setError(err.message || "something went wrong please try again");
+      }
     }
 
-    auth.login();
     console.log(formState.inputs);
     navigate("/");
   };
