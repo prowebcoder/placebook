@@ -12,10 +12,14 @@ import Card from "../component/Card";
 import "./Auth.css";
 import { AuthContext } from "../../context/log-context";
 import { useNavigate } from "react-router-dom";
+import ErrorModal from "../../common/UIComponents/ErrorModal";
+import LoadingSpinner from "../../common/UIComponents/LoadingSpinner";
 function Auth() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
   const [formState, inputHandler, setFormData] = useFormHook(
     {
       email: {
@@ -32,15 +36,38 @@ function Auth() {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    await fetch("http://localhost:4000/api/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: formState.inputs.name.value,
-        email: formState.inputs.email.value,
-        password: formState.inputs.password.value,
-      }),
-    });
+    if (isLoginMode) {
+      try {
+        setIsLoading(true);
+        const response = await fetch("http://localhost:4000/api/users/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value,
+          }),
+        });
+        const responseData = await response.json();
+        console.log(responseData);
+      } catch (err) {
+        setIsLoading(false);
+        setError(err.message || "something went wrong please try again");
+      }
+    } else {
+      const response = await fetch("http://localhost:4000/api/users/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formState.inputs.email.value,
+          name: formState.inputs.name.value,
+          password: formState.inputs.password.value,
+        }),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      setIsLoading(false);
+    }
+
     auth.login();
     console.log(formState.inputs);
     navigate("/");
@@ -69,48 +96,55 @@ function Auth() {
 
     setIsLoginMode((state) => !state);
   }
+  const errorHandler = () => {
+    setError(null);
+  };
   return (
-    <Card className="auth">
-      <h2>Login Required</h2>
-      <form onSubmit={authSubmitHandler}>
-        {!isLoginMode && (
+    <>
+      <ErrorModal error={error} onClear={errorHandler} />
+      <Card className="auth">
+        {isLoading && <LoadingSpinner></LoadingSpinner>}
+        <h2>Login Required</h2>
+        <form onSubmit={authSubmitHandler}>
+          {!isLoginMode && (
+            <Input
+              id="name"
+              element="input"
+              type="text"
+              label="Your Name"
+              onInput={inputHandler}
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please enter you name"
+            ></Input>
+          )}
           <Input
-            id="name"
+            id="email"
             element="input"
             type="text"
-            label="Your Name"
+            label="Your Email"
             onInput={inputHandler}
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter you name"
+            validators={[VALIDATOR_EMAIL()]}
+            errorText="Please enter the Email"
           ></Input>
-        )}
-        <Input
-          id="email"
-          element="input"
-          type="text"
-          label="Your Email"
-          onInput={inputHandler}
-          validators={[VALIDATOR_EMAIL()]}
-          errorText="Please enter the Email"
-        ></Input>
-        <Input
-          id="password"
-          element="input"
-          type="password"
-          label="Your password"
-          onInput={inputHandler}
-          validators={[VALIDATOR_MINLENGTH(5)]}
-          errorText="Please enter the Password"
-        ></Input>
+          <Input
+            id="password"
+            element="input"
+            type="password"
+            label="Your password"
+            onInput={inputHandler}
+            validators={[VALIDATOR_MINLENGTH(5)]}
+            errorText="Please enter the Password"
+          ></Input>
 
-        <Button type="submit" disabled={!formState.isValid}>
-          {isLoginMode ? "LOGIN" : "SIGNUP"}
+          <Button type="submit" disabled={!formState.isValid}>
+            {isLoginMode ? "LOGIN" : "SIGNUP"}
+          </Button>
+        </form>
+        <Button inverse type="submit" onClick={signUpHandler}>
+          Swich to {isLoginMode ? "Signup" : "Login"}
         </Button>
-      </form>
-      <Button inverse type="submit" onClick={signUpHandler}>
-        Swich to {isLoginMode ? "Signup" : "Login"}
-      </Button>
-    </Card>
+      </Card>
+    </>
   );
 }
 
