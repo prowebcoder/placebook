@@ -48,7 +48,7 @@ function Auth() {
           { "Content-Type": "application/json" }
         );
         console.log(responseData);
-        auth.login();
+        auth.login(responseData.user._id);
       } catch (err) {}
     } else {
       try {
@@ -62,12 +62,12 @@ function Auth() {
           }),
           { "Content-Type": "application/json" }
         );
-        console.log(responseData);
-        auth.login();
+        // console.log(responseData);
+        auth.login(responseData);
       } catch (err) {}
     }
 
-    console.log(formState.inputs);
+    // console.log(formState.inputs);
     navigate("/");
   };
   function signUpHandler() {

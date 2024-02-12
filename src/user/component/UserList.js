@@ -20,6 +20,7 @@ function UserList(props) {
             id={user._id}
             image={user.image}
             name={user.name}
+            placecount={user.places.length}
           />
         );
       })}

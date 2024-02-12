@@ -14,13 +14,16 @@ import { AuthContext } from "./context/log-context";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userID, setUserId] = useState(false);
 
-  const login = useCallback(() => {
+  const login = useCallback((uid) => {
     setIsLoggedIn(true);
+    setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
+    setUserId(null);
   }, []);
 
   let routes;
@@ -32,7 +35,7 @@ const App = () => {
         <Route path="/places" exact element={<Places />} />
         <Route path="/places" exact element={<Places />} />
         <Route path="/places/add-place" element={<NewPlace />} />
-        <Route path="/:userID/places" exact element={<UserPlaces />} />
+        <Route path="/:userID/:name/places" exact element={<UserPlaces />} />
         <Route path="/places/:placeID" element={<UpdatePlace />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
@@ -43,7 +46,7 @@ const App = () => {
         <Route path="/" exact element={<Users />} />
         <Route path="/users" element={<Users />} />
         <Route path="/places" exact element={<Places />} />
-        <Route path="/:userID/places" exact element={<UserPlaces />} />
+        <Route path="/:userID/:name/places" exact element={<UserPlaces />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
@@ -51,7 +54,12 @@ const App = () => {
   }
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
+      value={{
+        isLoggedIn: isLoggedIn,
+        login: login,
+        logout: logout,
+        userId: userID,
+      }}
     >
       <Nav />
       <main>{routes}</main>
