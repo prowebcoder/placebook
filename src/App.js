@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/places" exact element={<Places />} />
         <Route path="/places" exact element={<Places />} />
         <Route path="/places/add-place" element={<NewPlace />} />
-        <Route path="/:userID/:name/places" exact element={<UserPlaces />} />
+        <Route path="/:userID/places" exact element={<UserPlaces />} />
         <Route path="/places/:placeID" element={<UpdatePlace />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/" exact element={<Users />} />
         <Route path="/users" element={<Users />} />
         <Route path="/places" exact element={<Places />} />
-        <Route path="/:userID/:name/places" exact element={<UserPlaces />} />
+        <Route path="/:userID/places" exact element={<UserPlaces />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

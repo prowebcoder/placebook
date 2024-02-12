@@ -14,12 +14,12 @@ import { AuthContext } from "../../context/log-context";
 import { useNavigate } from "react-router-dom";
 import ErrorModal from "../../common/UIComponents/ErrorModal";
 import LoadingSpinner from "../../common/UIComponents/LoadingSpinner";
+import { useHttpClient } from "../../common/UIComponents/http-hook";
 function Auth() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
+  const { isLoading, error, sendRequest, errorHandler } = useHttpClient();
   const [formState, inputHandler, setFormData] = useFormHook(
     {
       email: {
@@ -38,49 +38,33 @@ function Auth() {
     event.preventDefault();
     if (isLoginMode) {
       try {
-        setIsLoading(true);
-        const response = await fetch("http://localhost:4000/api/users/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        const responseData = await sendRequest(
+          "http://localhost:4000/api/users/login",
+          "POST",
+          JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
-        });
-
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message || responseData);
-        }
-        setIsLoading(false);
-        auth.login();
+          { "Content-Type": "application/json" }
+        );
         console.log(responseData);
-      } catch (err) {
-        setIsLoading(false);
-        setError(err.message || "something went wrong please try again");
-      }
+        auth.login();
+      } catch (err) {}
     } else {
       try {
-        const response = await fetch("http://localhost:4000/api/users/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        const responseData = await sendRequest(
+          "http://localhost:4000/api/users/signup",
+          "POST",
+          JSON.stringify({
             email: formState.inputs.email.value,
             name: formState.inputs.name.value,
             password: formState.inputs.password.value,
           }),
-        });
-        const responseData = await response.json();
+          { "Content-Type": "application/json" }
+        );
         console.log(responseData);
-        if (!response.ok) {
-          throw new Error(responseData.message || responseData);
-        }
-        setIsLoading(false);
         auth.login();
-      } catch (err) {
-        setIsLoading(false);
-        setError(err.message || "something went wrong please try again");
-      }
+      } catch (err) {}
     }
 
     console.log(formState.inputs);
@@ -110,9 +94,7 @@ function Auth() {
 
     setIsLoginMode((state) => !state);
   }
-  const errorHandler = () => {
-    setError(null);
-  };
+
   return (
     <>
       <ErrorModal error={error} onClear={errorHandler} />

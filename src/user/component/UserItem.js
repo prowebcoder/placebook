@@ -7,7 +7,7 @@ function UserItem(props) {
   return (
     <li className="user-item">
       <Card className="user-item-content">
-        <Link to={`/${props.id}/${props.name}/places`}>
+        <Link to={`/${props.id}/places`}>
           <div className="user-item-image">
             <Avatar image={props.image} alt={props.name} className="xyz" />
           </div>
